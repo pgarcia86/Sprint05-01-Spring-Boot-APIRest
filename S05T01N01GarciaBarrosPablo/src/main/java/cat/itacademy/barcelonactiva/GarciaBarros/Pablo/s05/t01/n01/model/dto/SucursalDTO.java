@@ -4,22 +4,27 @@ import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
+import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 
 
+
 @Entity
-@Table(name = "sucursal")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Table(name = "sucursalDTO")
 public class SucursalDTO {
+
+private static final List<String> UE_CONTRIES = List.of("Alemania", "Bélgica", "Croacia", "Dinamarca", "España", "Francia", 
+		"Irlanda", "Letonia", "Luxemburgo",	"Países Bajos", "Suecia", "Bulgaria", "Eslovaquia", "Estonia", "Grecia",
+		"Malta", "Polonia", "República Checa", "Austria", "Chipre", "Eslovenia", "Finlandia", "Hungría", "Italia", 
+		"Lituania", "Portugal", "Rumanía");
+
+	
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "id_sucursal")
+	
+	@PrimaryKeyJoinColumn(name = "id_sucursal")
 	private int pk_SucursalId;
 	
 	@Column(name = "SucursalName")
@@ -31,17 +36,13 @@ public class SucursalDTO {
 	@Column(name = "SucursalType")
 	private String sucursalType;
 	
-	
-	private final List<String> UE_CONTRIES = List.of("Alemania", "Bélgica", "Croacia", "Dinamarca", "España", "Francia", 
-			"Irlanda", "Letonia", "Luxemburgo",	"Países Bajos", "Suecia", "Bulgaria", "Eslovaquia", "Estonia", "Grecia",
-			"Malta", "Polonia", "República Checa", "Austria", "Chipre", "Eslovenia", "Finlandia", "Hungría", "Italia", 
-			"Lituania", "Portugal", "Rumanía");
-	
 	public SucursalDTO() {}
 	
-	public SucursalDTO(String name, String country) {
+	public SucursalDTO(int id, String name, String country) {
+		this.pk_SucursalId = id;
 		this.sucursalName = name;
 		this.sucursalCountry = country;
+		setSucursalType(this.sucursalType);
 	}
 	
 	
@@ -74,8 +75,14 @@ public class SucursalDTO {
 		return sucursalType;
 	}
 
-	public void setSucursalType(String sucursalType) {
-		this.sucursalType = sucursalType;
+	public void setSucursalType(String sucursalType) {		
+		
+		if(UE_CONTRIES.contains(this.sucursalCountry)) {
+			this.sucursalType = "UE";
+		}
+		else {
+			this.sucursalType = "Fuera UE";
+		}
 	}
 
 }

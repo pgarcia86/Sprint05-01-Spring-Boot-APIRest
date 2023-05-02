@@ -5,6 +5,31 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-    <p th:text="'Hola, ' + ${sucursales.getPk_SucursalId()}+ '! Estas corriendo un proyecto Maven desde el metodo HelloWorld - Usando Postman'" />
+
+
+<table border="1">
+
+  <tr>
+
+    <td>ID</td>
+
+    <td>NOMBRE SUCURSAL</td>
+
+    <td>PAIS SUCURSAL</td>
+
+  </tr>
+
+  <tr th:each= "suc : ${sucursales}">
+
+    <td th:text="${suc.pk_SucursalId}"></td>
+
+    <td th:text="${suc.sucursalName}"></td>
+
+    <td th:text="${suc.sucursalCountry}"></td>
+
+  </tr>
+
+</table>
+
 </body>
 </html>

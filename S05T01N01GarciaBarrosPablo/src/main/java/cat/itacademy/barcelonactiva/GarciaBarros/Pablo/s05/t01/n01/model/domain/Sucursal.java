@@ -1,13 +1,10 @@
 package cat.itacademy.barcelonactiva.GarciaBarros.Pablo.s05.t01.n01.model.domain;
 
-import cat.itacademy.barcelonactiva.GarciaBarros.Pablo.s05.t01.n01.model.dto.SucursalDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
 import jakarta.persistence.Table;
 
 @Entity
